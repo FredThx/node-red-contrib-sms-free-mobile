@@ -1,0 +1,89 @@
+<!-- free-mobile-account -->
+<script type="text/javascript">
+    RED.nodes.registerType('free-mobile-account',{
+        category: 'config',
+        defaults: {
+            user: {value:"", required:true},
+            pass: {value:"", required:true},
+			api_url:  {value:"https://smsapi.free-mobile.fr/sendmsg", required:true},
+			name: {value:"My Free Mobile account", required:false}
+        },
+        label: function() {
+            return this.name || this.user;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="free-mobile-account">
+    <div class="form-row">
+        <label for="node-config-input-user"><i class="icon-bookmark"></i> User</label>
+        <input type="text" id="node-config-input-user" placeholder = "User">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-pass"><i class="icon-bookmark"></i> Pass</label>
+        <input type="text" id="node-config-input-pass" placeholder = "Pass">
+	</div>
+	<div class="form-row">
+        <label for="node-config-input-api_url"><i class="icon-bookmark"></i> api url</label>
+        <input type="text" id="node-config-input-api_url" placeholder = "api url">
+	</div>
+	<div class="form-row">
+        <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder = "Name">
+	</div>
+</script>
+
+<script type= "text/x-red"  data-help-name= "free-mobile-account"> 
+    <p> A Free Mobile Account.</p>
+	<ul>
+		<li>user = n° d'abonné Free Mobile</li>
+		<li>pass = clef d'identification</li>
+		<li>api url = url de l'api de l'operateur</li>
+	</ul>
+</script>
+
+<!-- sms-free-mobile -->
+
+<script type="text/javascript">
+    RED.nodes.registerType('sms-free-mobile',{
+        category: 'output',
+        color: '#FFFFFF',
+        defaults: {
+            free_mobile_account : { value : "", type:'free-mobile-account', required : true },
+			//to: {value:"0600000000", required:false},
+			texto : { value : "Message to send", required : false},
+			name : { value : "SMS Free Mobile"}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "free-mobile.png",
+        label: function() {
+			return this.name || "SMS Free Mobile";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="sms-free-mobile">
+    <div class="form-row">
+        <label for="node-input-free_mobile_account"><i class="icon-tag"></i> Free Mobile account</label>
+        <input type="text" id="node-input-free_mobile_account" placeholder="Free Mobile account">
+    </div>
+<!--     <div class="form-row">
+        <label for="node-input-to"><i class="icon-tag"></i> To</label>
+        <input type="text" id="node-input-to" placeholder = "Phone number">
+    </div> -->
+	<div class="form-row">
+        <label for="node-input-texto"><i class="icon-tag"></i> Message</label>
+        <input type="text" id="node-input-texto" placeholder="msg.payload">
+    </div>
+	<div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="sms-free-mobile">
+    <p>Send SMS via Free Mobile account.</p>
+	<!-- <p>If phone number "To" is not specified, the SMS is send to my phone.</p> -->
+	<p>If texto is not specified, msg.payload is used.</p>
+</script>
