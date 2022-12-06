@@ -26,9 +26,9 @@ module.exports = function(RED) {
 			var url = this.free_mobile_account.api_url;
 			url += '?user=' + this.free_mobile_account.user;
 			url += '&pass=' + this.free_mobile_account.pass;
-			if (this.to) {
-				url += '&to=' + this.to;
-			}
+			//if (this.to) {
+			//	url += '&to=' + this.to;  
+			//}
 			if (this.texto) {
 				url += '&msg=' + encodeURIComponent(this.texto);
 			} else {
